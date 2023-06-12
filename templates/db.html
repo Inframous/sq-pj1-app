@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div style="margin-left: 20px; margin-top: 10px;";>
+    <table>
+        <tr>
+            <th>Username</th>
+            <th>Login Time</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.username }}</td>
+            <td>{{ user.created_at }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

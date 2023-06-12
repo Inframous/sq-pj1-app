@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<style> 
+
+</style>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+        
+    </head>
+    <body>
+        <div class="topnav">
+            <a class="{{ 'active' if active_page == 'home' else '' }}" href="{{ url_for('home', active_page='home') }}">Home</a>
+            <a class="{{ 'active' if active_page == 'db' else '' }}" href="{{ url_for('view_db', active_page='db') }}">DB View</a>
+        </div>
+    {% block content %}
+
+    {% endblock %}
+        
+        <script src="" async defer></script>
+    </body>
+</html>
