@@ -47,9 +47,8 @@ def view_db():
     users = db.session.query(User).all()
     return render_template('db.html', users=users)
 
-    return render_template('db.html')
 
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=80)
+    app.run(debug=True, host='0.0.0.0', port=5000)
