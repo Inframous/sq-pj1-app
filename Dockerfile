@@ -19,7 +19,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Set up the environment variables
 ENV FLASK_APP=app.py
-ENV FLASK_ENV=development
+ENV FLASK_ENV=production
 ENV SQLALCHEMY_DATABASE_URI=sqlite:///users.db
 
 # Expose port 80 for the Flask app to listen on
