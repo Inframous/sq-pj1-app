@@ -4,7 +4,6 @@ from datetime import datetime
 from flask_migrate import Migrate
 from prometheus_flask_exporter import PrometheusMetrics
 
-
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 db = SQLAlchemy(app)

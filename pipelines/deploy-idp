@@ -1,0 +1,41 @@
+pipeline {
+    agent {
+        label 'IDP'
+    }
+    environment {
+        GITHUB_URL = 'git@github.com:Inframous/sq-pj2-idp.git'
+        SSH_CREDS = 'ssh-GitHub'
+    }
+    stages {
+        stage("Checkout SCM..."){
+            steps {
+
+                gitCheckout()
+            }
+        }
+        stage("Build IDP image..."){
+            steps {
+                withAWS(region: "us-west-1", credentials: "aws-Master-Controller") {
+
+                    sh '''
+                        sudo docker build --build-arg AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID --build-arg AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -t sq-pj2-idp .
+                        sudo docker rm -f sq-pj2-idp
+                        sudo docker run -d -p 80:80 --restart always --name sq-pj2-idp sq-pj2-idp
+                    '''
+                }
+            }
+        }
+    }   
+    
+}
+
+def gitCheckout() {
+    checkout([
+    $class: 'GitSCM',
+    branches: [[name: 'main']],
+    userRemoteConfigs : [[
+        url: "${GITHUB_URL}",
+        credentialsId: "${SSH_CREDS}",
+        ]]
+    ])
+}

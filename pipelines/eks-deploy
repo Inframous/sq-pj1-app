@@ -1,0 +1,41 @@
+pipeline {
+    agent { label 'J_Agent' }
+    environment {
+        GITHUB_URL = "git@github.com:Inframous/sq-pj4-infra.git"
+        GIT_CREDS = "ssh-GitHub"
+        AWS_REGION = "us-west-1"
+    }
+    stages {
+        stage("Git Checkout") {
+            steps {
+                gitCheckout()
+            }
+        }
+        stage("Deploying to EKS") {
+            steps {
+                withAWS(region: "${AWS_REGION}", credentials: "aws-Master-Controller") {
+                    sh '''
+                        cd k8s
+                        cd pj1-deployment-files
+                        aws eks update-kubeconfig --region=us-west-1 --name=sq-pj4-cluster
+                        kubectl config set-context --current --namespace=sq-pj4
+                        
+                        kubectl delete -f flask-app-deployment.yaml
+                        kubectl apply -f flask-app-deployment.yaml
+                    '''
+                }    
+            }
+        }
+    }
+}
+
+def gitCheckout() {
+    checkout([
+        $class: 'GitSCM',
+        branches: [[name: '*/main']],
+        userRemoteConfigs: [[
+            url: "${GITHUB_URL}",
+            credentialsId: "${GIT_CREDS}"
+        ]]
+    ])
+}
