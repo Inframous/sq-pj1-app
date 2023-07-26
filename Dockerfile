@@ -1,6 +1,7 @@
 # Use an official Python runtime as a parent image
 FROM ubuntu:22.04
 
+ENV DEBIAN_FRONTEND=noninteractive
 
 # Install required packages
 RUN apt-get update && \
