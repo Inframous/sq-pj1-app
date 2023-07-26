@@ -1,6 +1,7 @@
 # Use an official Python runtime as a parent image
 FROM ubuntu:20.04
 
+ENV DEBIAN_FRONTEND=noninteractive
 
 # Install required packages
 RUN apt-get update && \
@@ -16,7 +17,7 @@ RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add
 # # Install firefox
 # RUN apt-get update && apt-get install -y \
 #     firefox \
-#     libgtk-3-0 \
+#     libgtk-3-0 \  
 #     libdbus-glib-1-2
 
 # Set up the working directory
