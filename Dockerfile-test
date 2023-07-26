@@ -8,8 +8,8 @@ RUN apt-get update && \
     apt-get install -y wget gnupg2 unzip python3 python3-pip curl snapd && \
     rm -rf /var/lib/apt/lists/*
 
-RUN systemctl enable snapd && systemctl start snapd && snap install firefox -y
 RUN echo "export PATH=\$PATH:/snap/bin" >> ~/.bashrc
+RUN snap install firefox -y
 
 # Download and install Google Chrome
 # RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - && \
