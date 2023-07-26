@@ -27,7 +27,7 @@ EXPOSE 80
 
 # Set the environment variables for Flask
 ENV FLASK_APP=app.py 
-ENV FLASK_DEBUG=1
+
 
 # Run the Flask app
 CMD ["flask", "run", "--host=0.0.0.0", "--port=80"]
