@@ -1,6 +1,6 @@
 import sys
-import boto3
-from botocore.exceptions import NoCredentialsError
+import boto3 # type: ignore
+from botocore.exceptions import NoCredentialsError # type: ignore
 
 try: 
     assert(len(sys.argv) > 5)
