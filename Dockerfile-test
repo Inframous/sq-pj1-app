@@ -14,11 +14,6 @@ RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add
     apt-get update && \
     apt-get install -y google-chrome-stable=115.0.5790.102-1 && \
     rm -rf /var/lib/apt/lists/*
-# # Install firefox
-# RUN apt-get update && apt-get install -y \
-#     firefox \
-#     libgtk-3-0 \  
-#     libdbus-glib-1-2
 
 # Set up the working directory
 WORKDIR /app
