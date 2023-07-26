@@ -1,29 +1,13 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service as ChromiumService
-from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager
-
-from selenium.webdriver.common.by import By
-
-
 import pytest
+from app import app, db, User
 
-
-
-
-
-
-
-@pytest.fixture(scope="class")
-def setup():
-    # chrome_driver_path = ChromeDriverManager().install()
-    chrome_options = Options()
-    chrome_options.add_experimental_option("detach", True)
-    chrome_options.add_argument('--headless')
-    chrome_options.add_argument('--no-sandbox')
-    # service_obj = Service(chrome_driver_path)
-    driver = webdriver.Chrome(service=ChromiumService(ChromeDriverManager().install()))
-    # driver = webdriver.Chrome(service=service_obj, options=chrome_options)
-    driver.implicitly_wait(5)
-    yield driver
+@pytest.fixture
+def client():
+    app.config['TESTING'] = True
+    with app.test_client() as client:
+        with app.app_context():
+            db.create_all()
+        yield client
+        with app.app_context():
+            db.drop_all()
 
