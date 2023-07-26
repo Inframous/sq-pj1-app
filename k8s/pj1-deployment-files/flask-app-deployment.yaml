@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sq-pj1-app
+  namespace: sq-pj4
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sq-pj1-app
+  template:
+    metadata:
+      labels:
+        app: sq-pj1-app
+    spec:
+      containers:
+      - name: sq-pj1-app
+        image: inframous/sq-pj1-app:latest
+        ports:
+        - containerPort: 80
+        imagePullPolicy: Always
+        

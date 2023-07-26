@@ -1,0 +1,24 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: sq-pj4-cluster
+  region: us-west-1
+
+vpc:
+  subnets:
+    Private:
+      us-west-1a:
+        id: "subnet-0999f09c9364b17dc"
+      us-west-1c:
+        id: "subnet-056aedb5650de0484"
+
+
+
+managedNodeGroups:
+- name: standard-workers
+  instanceType: t2.micro
+  desiredCapacity: 5
+  minSize: 2
+  maxSize: 10
+
