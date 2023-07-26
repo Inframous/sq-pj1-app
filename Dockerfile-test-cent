@@ -14,8 +14,7 @@ RUN curl -O https://dl.google.com/linux/direct/google-chrome-stable_current_x86_
     yum -y localinstall google-chrome-stable_current_x86_64.rpm && \
     rm google-chrome-stable_current_x86_64.rpm
 
-# Set Python 3 as the default python version
-RUN alternatives --set python /usr/bin/python3
+
 
 # Set the working directory to /app
 WORKDIR /app
