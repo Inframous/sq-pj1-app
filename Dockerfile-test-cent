@@ -23,7 +23,7 @@ WORKDIR /app
 COPY . .
 
 # Install the required packages
-RUN pip3 install --no-cache-dir -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements2.txt
 
 # Set up the environment variables
 ENV FLASK_APP=app.py
