@@ -22,7 +22,7 @@ def setup():
     chrome_options.add_argument('--headless')
     chrome_options.add_argument('--no-sandbox')
     # service_obj = Service(chrome_driver_path)
-    driver = webdriver.Chrome(service=ChromiumService(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()))
+    driver = webdriver.Chrome(service=ChromiumService(ChromeDriverManager().install()))
     # driver = webdriver.Chrome(service=service_obj, options=chrome_options)
     driver.implicitly_wait(5)
     yield driver
