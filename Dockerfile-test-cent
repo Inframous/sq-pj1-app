@@ -1,6 +1,9 @@
 # Use the official CentOS image as the base image
 FROM centos:latest
 
+RUN yum clean all && \
+    rm -rf /var/cache/yum
+
 # Update the package manager and install required dependencies
 RUN yum -y update && \
     yum -y install wget unzip python3 python3-pip curl && \
