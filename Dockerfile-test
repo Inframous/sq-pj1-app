@@ -13,7 +13,7 @@ RUN service apparmor restart
 
 
 
-RUN snap install firefox -y
+RUN snap install firefox -q
 
 # Download and install Google Chrome
 # RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - && \
