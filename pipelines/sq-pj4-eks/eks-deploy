@@ -1,7 +1,7 @@
 pipeline {
     agent { label 'J_Agent' }
     environment {
-        GITHUB_URL = "git@github.com:Inframous/sq-pj4-infra.git"
+        GITHUB_URL = "git@github.com:Inframous/sq-pj1-app.git"
         GIT_CREDS = "ssh-GitHub"
         AWS_REGION = "us-west-1"
     }

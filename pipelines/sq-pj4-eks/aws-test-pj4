@@ -1,9 +1,3 @@
-// testing - DONE
-// pushing to Docker-Hub - 
-// loggin to CSV - DONE
-// logging to DynamoDB - DONE
-// starting next job - PARTIAL DONE (Confirm)
-
 pipeline {
     agent { label 'J_Agent' }
     environment {
@@ -12,12 +6,10 @@ pipeline {
         GITHUB_CREDS = 'ssh-GitHub'
         LOG_BUCKET = 'sq-pj4-bucket'
         AWS_REGION = "us-west-1"
-
     }
     stages {
         stage('Checkout SCM') {
             steps {
-                sh "sudo rm -rf **"
                 gitCheckout()
             }
         }
@@ -68,18 +60,6 @@ pipeline {
                 '''
             }
         }
-        // stage('Building Official Image') {
-        //     when {
-        //         expression {
-        //             env.TEST_RESULT == 'SUCCESS' 
-        //         }
-        //     }
-        //     steps {
-        //         sh '''
-                    
-        //         '''
-        //     }
-        // }
         stage('Building Official Image and Pushing to Docker-Hub') {
             when {
                 expression {
@@ -117,13 +97,6 @@ pipeline {
             }
 
         }
-        // stage("Cleaning up, removing image ...") {
-        //     steps {
-        //         sh '''
-        //             sudo docker image rm sq-pj1-app
-        //         '''
-        //     }
-        // }
     }
     post {
         always {
@@ -174,7 +147,7 @@ pipeline {
         }
         failure {
             script {
-                echo "The test faled."
+                echo "The test failed."
                 echo "Cleaning up... "
                 sh 'sudo rm -rf **'
             }
