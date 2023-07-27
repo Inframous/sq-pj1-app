@@ -1,5 +1,8 @@
 pipeline {
     agent { label 'J_Agent' }
+    options {
+        sandbox()
+    }
     environment {
         JOB_NAME_TO_TRIGGER = ""
         GITHUB_REPO = "git@github.com:Inframous/sq-pj1-app.git"
