@@ -31,7 +31,7 @@ pipeline {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     sh '''
-                        sudo docker exec -i sq-pj1-app pytest
+                        sudo docker exec -i sq-pj1-app pytest --html=report.html --self-contained-html
                     '''
                     script {
                         if (currentBuild.result == 'FAILURE') {
@@ -110,7 +110,11 @@ pipeline {
                 // Setting up a variable with the current date and time.
             def now = new Date().format("dd/MM/yy-HH:mm", TimeZone.getTimeZone('UTC'))
                 env.NOW = now
-
+                
+                // Renaming report.html
+            sh '''
+                mv report.html ${NOW}-report.html
+            '''
                 // Trying to download report.csv from the bucket
             def report_file = sh(script: "wget https://${LOG_BUCKET}.s3.${AWS_REGION}.amazonaws.com/report.csv", returnStatus: true)
                 // If this is the first run, the CSV file won't be there, so we'll create it.
@@ -127,6 +131,7 @@ pipeline {
                 // Uploading the report.csv to the bucket  
             withAWS(region: "${AWS_REGION}", credentials: "aws-Master-Controller") {
                 s3Upload(file:"report.csv", bucket:"${LOG_BUCKET}", path:"")
+                s3Upload(file:"${NOW}-report.html", bucket:"${LOG_BUCKET}", path:"/html-reports")
                 script {
                     logTestToDynamoDB()
                 }
