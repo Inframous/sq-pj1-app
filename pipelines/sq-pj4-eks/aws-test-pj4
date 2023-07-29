@@ -151,11 +151,11 @@ pipeline {
             }
         }
         failure {
-            script {
-                echo "The test failed."
-                echo "Cleaning up... "
-                sh 'sudo rm -rf **'
-            }
+            // script {
+            //     echo "The test failed."
+            //     echo "Cleaning up... "
+            //     sh 'sudo rm -rf **'
+            // }
         }
     }
 }
