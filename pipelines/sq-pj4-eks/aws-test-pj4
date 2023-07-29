@@ -32,7 +32,7 @@ pipeline {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     sh '''
                         sudo docker exec -i sq-pj1-app pytest --html=report.html --self-contained-html
-                        docker cp sq-pj1-app:/app/result.html .
+                        sudo docker cp sq-pj1-app:/app/result.html .
                     '''
                     script {
                         if (currentBuild.result == 'FAILURE') {
