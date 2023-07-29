@@ -109,7 +109,7 @@ pipeline {
                 env.TEST_RESULT = 'SUCCESS'
             }
                 // Setting up a variable with the current date and time.
-            def now = new Date().format("dd/MM/yy-HH:mm", TimeZone.getTimeZone('UTC'))
+            def now = new Date().format("dd-MM-yy--HH:mm:ss", TimeZone.getTimeZone('UTC'))
                 env.NOW = now
                 
                 // Renaming report.html
