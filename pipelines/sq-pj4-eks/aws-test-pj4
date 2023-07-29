@@ -144,7 +144,7 @@ pipeline {
             }
             script {
                 echo "Cleaning up... "
-                sh 'sudo rm -rf **'
+                cleanWs(cleanWhenNotBuilt: false)
             }
         }
         success {
@@ -157,7 +157,7 @@ pipeline {
             script {
                 echo "The test failed."
                 echo "Cleaning up... "
-                // sh 'sudo rm -rf **'
+                cleanWs(cleanWhenNotBuilt: false)
             }
         }
     }
