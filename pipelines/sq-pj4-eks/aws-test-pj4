@@ -132,12 +132,13 @@ pipeline {
                 // Uploading the report.csv to the bucket  
             withAWS(region: "${AWS_REGION}", credentials: "aws-Master-Controller") {
                 s3Upload(file:"report.csv", bucket:"${LOG_BUCKET}", path:"")
-                s3Upload(file:"${NOW}-report.html", bucket:"${LOG_BUCKET}", path:"/html-reports")
+                s3Upload(file:"${NOW}-report.html", bucket:"${LOG_BUCKET}", path:"html-reports")
                 script {
                     logTestToDynamoDB()
                 }
                 sh '''
                     aws s3api put-object-acl --region us-west-1 --bucket sq-pj4-bucket --key report.csv --acl public-read
+                    aws s3api put-object-acl --region us-west-1 --bucket sq-pj4-bucket --key ${NOW}-report.html --acl public-read
                     
                 '''
             }
