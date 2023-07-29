@@ -138,6 +138,7 @@ pipeline {
                 }
                 sh '''
                     aws s3api put-object-acl --region us-west-1 --bucket sq-pj4-bucket --key report.csv --acl public-read
+                    aws s3api put-object-acl --region us-west-1 --bucket sq-pj4-bucket --key html-reports/${NOW}-report.html --acl public-read
                     
                 '''
             }
