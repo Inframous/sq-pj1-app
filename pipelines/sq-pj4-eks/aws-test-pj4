@@ -137,6 +137,7 @@ pipeline {
                 }
                 sh '''
                     aws s3api put-object-acl --region us-west-1 --bucket sq-pj4-bucket --key report.csv --acl public-read
+                    
                 '''
             }
             script {
@@ -151,11 +152,11 @@ pipeline {
             }
         }
         failure {
-            // script {
-            //     echo "The test failed."
-            //     echo "Cleaning up... "
-            //     sh 'sudo rm -rf **'
-            // }
+            script {
+                echo "The test failed."
+                echo "Cleaning up... "
+                // sh 'sudo rm -rf **'
+            }
         }
     }
 }
